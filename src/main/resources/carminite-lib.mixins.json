@@ -39,6 +39,7 @@
     "SlimeMixin",
     "SpawnerBlockEntity$1Mixin",
     "ThrowableProjectileMixin",
+    "ProjectileUtilMixin",
     "TrialSpawnerMixin",
     "WalkNodeEvaluatorMixin"
   ],
