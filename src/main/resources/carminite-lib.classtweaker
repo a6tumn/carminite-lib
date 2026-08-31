@@ -1,6 +1,10 @@
 classTweaker v2 official
 
-# Comment each CT with where it needed to be used and why
+# Comment each CT with where it needed to be used
+
+# CommonHooks
+accessible field net/minecraft/world/inventory/AnvilMenu cost Lnet/minecraft/world/inventory/DataSlot;
+accessible field net/minecraft/world/inventory/AnvilMenu repairItemCountCost I
 
 # Interface Injections
 transitive-inject-interface net/minecraft/core/HolderLookup$Provider carminite/interfaces/extensions/IHolderLookupProviderExtension

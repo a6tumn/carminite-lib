@@ -7,6 +7,7 @@
     "AbstractHorseMixin",
     "AbstractHurtingProjectileMixin",
     "AbstractSkeletonMixin",
+    "AnvilMenuMixin",
     "BeardifierMixin",
     "BowItemMixin",
     "CamelMixin",
@@ -29,6 +30,7 @@
     "PlayerAdvancementsMixin",
     "PlayerListMixin",
     "PlayerMixin",
+    "ProjectileUtilMixin",
     "ProjectileWeaponItemMixin",
     "RedStoneWireBlockMixin",
     "ServerExplosionMixin",
@@ -39,7 +41,6 @@
     "SlimeMixin",
     "SpawnerBlockEntity$1Mixin",
     "ThrowableProjectileMixin",
-    "ProjectileUtilMixin",
     "TrialSpawnerMixin",
     "WalkNodeEvaluatorMixin"
   ],
