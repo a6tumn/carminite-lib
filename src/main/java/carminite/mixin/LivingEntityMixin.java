@@ -13,6 +13,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -131,5 +132,24 @@ public abstract class LivingEntityMixin {
 	)
 	private void carminite$livingJump(CallbackInfo ci) {
 		CommonHooks.onLivingJump((LivingEntity) (Object) this);
+	}
+
+	@Inject(
+		method = "doHurtEquipment(Lnet/minecraft/world/damagesource/DamageSource;F[Lnet/minecraft/world/entity/EquipmentSlot;)V",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/world/entity/LivingEntity;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;",
+			shift = At.Shift.BEFORE
+		),
+		cancellable = true
+	)
+	private void carminite$armorHurt(
+		DamageSource damageSource,
+		float damage, EquipmentSlot[] slots,
+		CallbackInfo ci,
+		@Local(name = "durabilityDamage") int durabilityDamage
+	) {
+		CommonHooks.onArmorHurt(damageSource, slots, durabilityDamage, (LivingEntity) (Object) this);
+		ci.cancel();
 	}
 }

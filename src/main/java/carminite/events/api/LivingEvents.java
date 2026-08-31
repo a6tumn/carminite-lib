@@ -1,5 +1,6 @@
 package carminite.events.api;
 
+import carminite.events.neoforge.ArmorHurtEvent;
 import carminite.events.neoforge.LivingDeathEvent;
 import carminite.events.neoforge.LivingEvent;
 import net.fabricmc.fabric.api.event.Event;
@@ -17,6 +18,17 @@ public final class LivingEvents {
             callback.onLivingDeath(event);
         }
     });
+
+    public static final Event<ArmorHurt> ARMOR_HURT = EventFactory.createArrayBacked(ArmorHurt.class, callbacks -> event -> {
+        for (ArmorHurt callback : callbacks) {
+            callback.onArmorHurt(event);
+        }
+    });
+
+    @FunctionalInterface
+    public interface ArmorHurt {
+        void onArmorHurt(ArmorHurtEvent event);
+    }
 
     @FunctionalInterface
     public interface LivingJump {
