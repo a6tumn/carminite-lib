@@ -75,4 +75,14 @@ public class EventHooks {
 	public static void onExplosionDetonate(Level level, ServerExplosion explosion, List<Entity> entities, List<BlockPos> blocks) {
 		new ExplosionEvent.Detonate(level, explosion, entities, blocks).post();
 	}
+
+	public static boolean canMountEntity(Entity entityMounting, Entity entityBeingMounted, boolean isMounting) {
+		boolean isCanceled = new EntityMountEvent(entityMounting, entityBeingMounted, entityMounting.level(), isMounting).post().isCanceled();
+
+		if (isCanceled) {
+			entityMounting.absSnapTo(entityMounting.getX(), entityMounting.getY(), entityMounting.getZ(), entityMounting.yRotO, entityMounting.xRotO);
+			return false;
+		} else
+			return true;
+	}
 }
