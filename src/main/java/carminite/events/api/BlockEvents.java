@@ -1,4 +1,4 @@
-package carminite.events;
+package carminite.events.api;
 
 import carminite.events.neoforge.BreakBlockEvent;
 import net.fabricmc.fabric.api.event.Event;

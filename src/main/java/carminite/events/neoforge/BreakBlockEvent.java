@@ -1,6 +1,6 @@
 package carminite.events.neoforge;
 
-import carminite.events.BlockEvents;
+import carminite.events.api.BlockEvents;
 import carminite.events.ICancellableEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;

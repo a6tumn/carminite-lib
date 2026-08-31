@@ -1,7 +1,7 @@
 package carminite.events.neoforge;
 
 import carminite.events.ICancellableEvent;
-import carminite.events.PlayerEvents;
+import carminite.events.api.PlayerEvents;
 import com.google.common.base.Preconditions;
 import net.fabricmc.api.EnvType;
 import net.minecraft.core.BlockPos;

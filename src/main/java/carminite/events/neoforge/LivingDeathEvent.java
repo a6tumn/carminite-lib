@@ -1,7 +1,7 @@
 package carminite.events.neoforge;
 
 import carminite.events.ICancellableEvent;
-import carminite.events.LivingEvents;
+import carminite.events.api.LivingEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 

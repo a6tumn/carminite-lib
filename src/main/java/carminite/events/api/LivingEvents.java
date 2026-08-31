@@ -1,4 +1,4 @@
-package carminite.events;
+package carminite.events.api;
 
 import carminite.events.neoforge.LivingDeathEvent;
 import carminite.events.neoforge.LivingEvent;

@@ -1,4 +1,4 @@
-package carminite.events;
+package carminite.events.api;
 
 import carminite.events.neoforge.EntityJoinLevelEvent;
 import carminite.events.neoforge.EntityStruckByLightningEvent;

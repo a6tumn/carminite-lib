@@ -1,6 +1,6 @@
 package carminite.events.neoforge;
 
-import carminite.events.PlayerEvents;
+import carminite.events.api.PlayerEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;

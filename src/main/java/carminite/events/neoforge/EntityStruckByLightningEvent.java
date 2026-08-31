@@ -1,6 +1,6 @@
 package carminite.events.neoforge;
 
-import carminite.events.EntityEvents;
+import carminite.events.api.EntityEvents;
 import carminite.events.ICancellableEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LightningBolt;

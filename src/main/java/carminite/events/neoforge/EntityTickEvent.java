@@ -1,7 +1,7 @@
 package carminite.events.neoforge;
 
 import carminite.events.ICancellableEvent;
-import carminite.events.TickEvents;
+import carminite.events.api.TickEvents;
 import net.minecraft.world.entity.Entity;
 
 public abstract class EntityTickEvent extends EntityEvent {

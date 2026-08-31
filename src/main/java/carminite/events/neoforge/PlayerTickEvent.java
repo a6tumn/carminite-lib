@@ -1,6 +1,6 @@
 package carminite.events.neoforge;
 
-import carminite.events.TickEvents;
+import carminite.events.api.TickEvents;
 import net.minecraft.world.entity.player.Player;
 
 public abstract class PlayerTickEvent extends PlayerEvent {

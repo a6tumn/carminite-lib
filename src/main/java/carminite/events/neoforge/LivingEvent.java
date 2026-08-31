@@ -1,6 +1,6 @@
 package carminite.events.neoforge;
 
-import carminite.events.LivingEvents;
+import carminite.events.api.LivingEvents;
 import net.minecraft.world.entity.LivingEntity;
 
 public abstract class LivingEvent extends EntityEvent {

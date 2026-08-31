@@ -3,7 +3,7 @@ package carminite.events.neoforge;
 import java.util.List;
 
 import carminite.events.CarminiteEvent;
-import carminite.events.LevelEvents;
+import carminite.events.api.LevelEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
