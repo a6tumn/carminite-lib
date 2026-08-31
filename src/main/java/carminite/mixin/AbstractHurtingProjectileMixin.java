@@ -37,7 +37,7 @@ public class AbstractHurtingProjectileMixin {
 		boolean allowed = !EventHooks.onProjectileImpact((AbstractHurtingProjectile) (Object) this, hitResult);
 		impacted.set(allowed);
 
-		return allowed ? type : HitResult.Type.MISS;
+		return type;
 	}
 
 	@WrapOperation(
