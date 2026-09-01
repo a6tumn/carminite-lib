@@ -1,16 +1,13 @@
 package carminite;
 
-import carminite.datamap.DataMapReloadListener;
 import carminite.multipart.IMultiPartEntity;
 import carminite.multipart.PartEntity;
 import carminite.util.ServerLifecycleHooks;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.minecraft.resources.Identifier;
 
-import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +23,6 @@ public class Carminite implements ModInitializer {
 	public void onInitialize() {
 		ServerLifecycleHooks.init();
 		registerServerMultipartEvents();
-		registerReloadListeners();
 	}
 
 	private static void registerServerMultipartEvents() {
@@ -50,9 +46,5 @@ public class Carminite implements ModInitializer {
 				}
 			}
 		});
-	}
-
-	private static void registerReloadListeners() {
-		ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(id("data_map"), new DataMapReloadListener());
 	}
 }
