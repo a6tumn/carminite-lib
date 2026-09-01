@@ -86,47 +86,4 @@ public abstract class PlayerEvent extends LivingEvent {
 			return this;
 		}
 	}
-
-	public static class PlayerLoggedInEvent extends PlayerEvent {
-		public PlayerLoggedInEvent(Player player) {
-			super(player);
-		}
-
-		@Override
-		public PlayerLoggedInEvent post() {
-			PlayerEvents.PLAYER_LOGGED_IN.invoker().firePlayerLoggedIn(this);
-			return this;
-		}
-	}
-
-	public static class PlayerLoggedOutEvent extends PlayerEvent {
-		public PlayerLoggedOutEvent(Player player) {
-			super(player);
-		}
-
-		@Override
-		public PlayerLoggedOutEvent post() {
-			PlayerEvents.PLAYER_LOGGED_OUT.invoker().firePlayerLoggedOut(this);
-			return this;
-		}
-	}
-
-	public static class PlayerRespawnEvent extends PlayerEvent {
-		private final boolean endConquered;
-
-		public PlayerRespawnEvent(Player player, boolean endConquered) {
-			super(player);
-			this.endConquered = endConquered;
-		}
-
-		public boolean isEndConquered() {
-			return this.endConquered;
-		}
-
-		@Override
-		public PlayerRespawnEvent post() {
-			PlayerEvents.PLAYER_RESPAWN.invoker().firePlayerRespawnEvent(this);
-			return this;
-		}
-	}
 }

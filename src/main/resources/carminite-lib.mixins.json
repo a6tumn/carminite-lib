@@ -30,7 +30,6 @@
     "PistonBaseBlockMixin",
     "PistonStructureResolverMixin",
     "PlayerAdvancementsMixin",
-    "PlayerListMixin",
     "PlayerMixin",
     "ProjectileUtilMixin",
     "ProjectileWeaponItemMixin",

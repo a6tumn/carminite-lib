@@ -17,24 +17,6 @@ public final class PlayerEvents {
         }
     });
 
-    public static final Event<PlayerLoggedIn> PLAYER_LOGGED_IN = EventFactory.createArrayBacked(PlayerLoggedIn.class, callbacks -> event -> {
-        for (PlayerLoggedIn callback : callbacks) {
-            callback.firePlayerLoggedIn(event);
-        }
-    });
-
-    public static final Event<PlayerLoggedOut> PLAYER_LOGGED_OUT = EventFactory.createArrayBacked(PlayerLoggedOut.class, callbacks -> event -> {
-        for (PlayerLoggedOut callback : callbacks) {
-            callback.firePlayerLoggedOut(event);
-        }
-    });
-
-    public static final Event<PlayerRespawn> PLAYER_RESPAWN = EventFactory.createArrayBacked(PlayerRespawn.class, callbacks -> event -> {
-        for (PlayerRespawn callback : callbacks) {
-            callback.firePlayerRespawnEvent(event);
-        }
-    });
-
     public static final Event<RightClickBlock> RIGHT_CLICK_BLOCK = EventFactory.createArrayBacked(RightClickBlock.class, callbacks -> event -> {
         for (RightClickBlock callback : callbacks) {
             callback.onRightClickBlock(event);
@@ -75,20 +57,6 @@ public final class PlayerEvents {
         void firePlayerCraftingEvent(PlayerEvent.ItemCraftedEvent event);
     }
 
-    @FunctionalInterface
-    public interface PlayerLoggedIn {
-        void firePlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event);
-    }
-
-    @FunctionalInterface
-    public interface PlayerLoggedOut {
-        void firePlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event);
-    }
-
-    @FunctionalInterface
-    public interface PlayerRespawn{
-        void firePlayerRespawnEvent(PlayerEvent.PlayerRespawnEvent event);
-    }
 
     @FunctionalInterface
     public interface RightClickBlock {

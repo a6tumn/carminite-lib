@@ -2,7 +2,6 @@ package carminite.events.hooks;
 
 import carminite.events.neoforge.*;
 import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ServerExplosion;
@@ -54,18 +53,6 @@ public class EventHooks {
 
 	public static void firePlayerTickPost(Player player) {
 		new PlayerTickEvent.Post(player).post();
-	}
-
-	public static void firePlayerLoggedIn(Player player) {
-		new PlayerEvent.PlayerLoggedInEvent(player).post();
-	}
-
-	public static void firePlayerLoggedOut(Player player) {
-		new PlayerEvent.PlayerLoggedOutEvent(player).post();
-	}
-
-	public static void firePlayerRespawnEvent(ServerPlayer player, boolean fromEndFight) {
-		new PlayerEvent.PlayerRespawnEvent(player, fromEndFight).post();
 	}
 
 	@ApiStatus.Internal
