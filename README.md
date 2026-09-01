@@ -1,7 +1,7 @@
 ![title.png](src/main/resources/assets/carminite-lib/title.png)
 
 ## Licensing
-Code unless otherwise stated default to our [LICENSE file here](LICENSE).
+Code unless otherwise stated defaults to our [LICENSE file here](LICENSE).
 
 Non-Code assets [(Located here)](src/main/resources/assets) go by our [LICENSE_ASSETS file here](LICENSE_ASSETS).
 
