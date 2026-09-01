@@ -16,6 +16,8 @@
     "FireBlockMixin",
     "FireworkRocketEntityMixin",
     "FishingHookMixin",
+    "GrindstoneMenu$4Mixin",
+    "GrindstoneMenuMixin",
     "IllusionerMixin",
     "LevelMixin",
     "LightningBoltMixin",

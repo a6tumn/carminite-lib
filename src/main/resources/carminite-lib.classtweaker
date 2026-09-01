@@ -6,6 +6,9 @@ classTweaker v2 official
 accessible field net/minecraft/world/inventory/AnvilMenu cost Lnet/minecraft/world/inventory/DataSlot;
 accessible field net/minecraft/world/inventory/AnvilMenu repairItemCountCost I
 
+# GrindstoneMenu$4Mixin
+accessible field net/minecraft/world/inventory/GrindstoneMenu repairSlots Lnet/minecraft/world/Container;
+
 # Interface Injections
 transitive-inject-interface net/minecraft/core/HolderLookup$Provider carminite/interfaces/extensions/IHolderLookupProviderExtension
 transitive-inject-interface net/minecraft/world/level/Level carminite/interfaces/extensions/ILevelExtension
