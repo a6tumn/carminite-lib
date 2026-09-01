@@ -3,6 +3,7 @@ package carminite.events.hooks;
 import carminite.events.neoforge.*;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ServerExplosion;
 import net.minecraft.world.phys.HitResult;
@@ -33,6 +34,10 @@ public class EventHooks {
 		if (event.isCanceled())
 			return -1;
 		return event.getCharge();
+	}
+
+	public static void firePlayerCraftingEvent(Player player, ItemStack crafted, Container craftMatrix) {
+		new PlayerEvent.ItemCraftedEvent(player, crafted, craftMatrix).post();
 	}
 
 	public static EntityTickEvent.Pre fireEntityTickPre(Entity entity) {

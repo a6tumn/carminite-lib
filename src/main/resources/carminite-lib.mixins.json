@@ -35,6 +35,7 @@
     "ProjectileUtilMixin",
     "ProjectileWeaponItemMixin",
     "RedStoneWireBlockMixin",
+    "ResultSlotMixin",
     "ServerExplosionMixin",
     "ServerLevelMixin",
     "ServerPlayerGameModeMixin",

@@ -11,6 +11,12 @@ public final class PlayerEvents {
         }
     });
 
+    public static final Event<ItemCrafted> ITEM_CRAFTED = EventFactory.createArrayBacked(ItemCrafted.class, callbacks -> event -> {
+        for (ItemCrafted callback : callbacks) {
+            callback.firePlayerCraftingEvent(event);
+        }
+    });
+
     public static final Event<PlayerLoggedIn> PLAYER_LOGGED_IN = EventFactory.createArrayBacked(PlayerLoggedIn.class, callbacks -> event -> {
         for (PlayerLoggedIn callback : callbacks) {
             callback.firePlayerLoggedIn(event);
@@ -62,6 +68,11 @@ public final class PlayerEvents {
     @FunctionalInterface
     public interface HarvestCheck {
         void doPlayerHarvestCheck(PlayerEvent.HarvestCheck event);
+    }
+
+    @FunctionalInterface
+    public interface ItemCrafted {
+        void firePlayerCraftingEvent(PlayerEvent.ItemCraftedEvent event);
     }
 
     @FunctionalInterface
