@@ -48,6 +48,7 @@
   ],
   "client": [
     "BlockEntityRenderDispatcherMixin",
+    "CameraMixin",
     "ClientLevelMixin",
     "EntityHitboxDebugRendererMixin",
     "ItemInHandRendererMixin",

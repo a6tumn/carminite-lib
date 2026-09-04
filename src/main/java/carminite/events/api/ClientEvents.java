@@ -1,6 +1,7 @@
 package carminite.events.api;
 
 import carminite.events.neoforge.RenderFrameEvent;
+import carminite.events.neoforge.ViewportEvent;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 
@@ -17,11 +18,24 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<ComputeCameraAngles> COMPUTE_CAMERA_ANGLES = EventFactory.createArrayBacked(ComputeCameraAngles.class, callbacks -> event -> {
+        for (ComputeCameraAngles callback : callbacks) {
+            callback.computeCameraAngles(event);
+        }
+    });
+
+    @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
     }
 
+    @FunctionalInterface
     public interface RenderFramePost {
         void fireRenderFramePost(RenderFrameEvent.Post event);
+    }
+
+    @FunctionalInterface
+    public interface ComputeCameraAngles {
+        void computeCameraAngles(ViewportEvent.ComputeCameraAngles event);
     }
 }
