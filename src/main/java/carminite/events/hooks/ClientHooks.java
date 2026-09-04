@@ -1,6 +1,8 @@
 package carminite.events.hooks;
 
+import carminite.events.neoforge.RenderFrameEvent;
 import carminite.interfaces.markers.IContinuousUseItem;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.world.item.ItemStack;
 
 public class ClientHooks {
@@ -20,5 +22,13 @@ public class ClientHooks {
 		}
 
 		return ((IContinuousUseItem) from.getItem()).shouldCauseReequipAnimation(from, to, changed);
+	}
+
+	public static void fireRenderFramePre(DeltaTracker partialTick) {
+		new RenderFrameEvent.Pre(partialTick).post();
+	}
+
+	public static void fireRenderFramePost(DeltaTracker partialTick) {
+		new RenderFrameEvent.Post(partialTick).post();
 	}
 }
