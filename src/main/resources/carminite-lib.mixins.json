@@ -31,6 +31,7 @@
     "PistonStructureResolverMixin",
     "PlayerAdvancementsMixin",
     "PlayerMixin",
+    "PowderSnowBlockMixin",
     "ProjectileUtilMixin",
     "ProjectileWeaponItemMixin",
     "RedStoneWireBlockMixin",
