@@ -12,6 +12,7 @@
     "BowItemMixin",
     "BundleContentsMixin",
     "CamelMixin",
+    "EnchantmentHelperMixin",
     "EntityMixin",
     "ExplosionDamageCalculatorMixin",
     "FireBlockMixin",
