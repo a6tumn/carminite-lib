@@ -5,6 +5,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -26,5 +27,9 @@ public interface IItemExtension {
 
 	default boolean carminite$canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer) {
 		return stack.is(Items.LEATHER_BOOTS);
+	}
+
+	default boolean carminite$canFitInsideContainerItems(ItemStack stack) {
+		return ((Item) (Object) this).canFitInsideContainerItems();
 	}
 }
