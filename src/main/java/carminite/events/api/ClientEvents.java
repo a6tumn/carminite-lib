@@ -1,9 +1,6 @@
 package carminite.events.api;
 
-import carminite.events.neoforge.InputEvent;
-import carminite.events.neoforge.MovementInputUpdateEvent;
-import carminite.events.neoforge.RenderFrameEvent;
-import carminite.events.neoforge.ViewportEvent;
+import carminite.events.neoforge.*;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 
@@ -38,6 +35,12 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<ComputeFovModifier> COMPUTE_FOV_MODIFIER = EventFactory.createArrayBacked(ComputeFovModifier.class, callbacks -> event -> {
+        for (ComputeFovModifier callback : callbacks) {
+            callback.getFieldOfViewModifier(event);
+        }
+    });
+
     @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
@@ -61,5 +64,10 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface InputKey {
         void onKeyInput(InputEvent.Key event);
+    }
+
+    @FunctionalInterface
+    public interface ComputeFovModifier {
+        void getFieldOfViewModifier(ComputeFovModifierEvent event);
     }
 }

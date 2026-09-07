@@ -52,6 +52,7 @@
     "WalkNodeEvaluatorMixin"
   ],
   "client": [
+    "AbstractClientPlayerMixin",
     "BlockEntityRenderDispatcherMixin",
     "CameraMixin",
     "ClientLevelMixin",

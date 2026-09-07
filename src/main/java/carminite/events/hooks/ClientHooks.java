@@ -1,5 +1,6 @@
 package carminite.events.hooks;
 
+import carminite.events.neoforge.ComputeFovModifierEvent;
 import carminite.events.neoforge.InputEvent;
 import carminite.events.neoforge.MovementInputUpdateEvent;
 import carminite.events.neoforge.RenderFrameEvent;
@@ -35,6 +36,12 @@ public class ClientHooks {
 
 	public static void onKeyInput(KeyEvent keyEvent, int action) {
 		new InputEvent.Key(keyEvent, action).post();
+	}
+
+	public static float getFieldOfViewModifier(Player entity, float fovModifier, float fovScale) {
+		ComputeFovModifierEvent fovModifierEvent = new ComputeFovModifierEvent(entity, fovModifier, fovScale);
+		fovModifierEvent.post();
+		return fovModifierEvent.getNewFovModifier();
 	}
 
 	public static void fireRenderFramePre(DeltaTracker partialTick) {
