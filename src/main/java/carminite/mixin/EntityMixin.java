@@ -11,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jspecify.annotations.Nullable;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,9 +24,6 @@ public class EntityMixin {
 
 	@Shadow
 	private Level level;
-
-	@Shadow
-	private @Nullable Entity vehicle;
 
 	@Definition(id = "blockState", local = @Local(type = BlockState.class))
 	@Definition(id = "getRenderShape", method = "Lnet/minecraft/world/level/block/state/BlockState;getRenderShape()Lnet/minecraft/world/level/block/RenderShape;")
@@ -88,13 +84,15 @@ public class EntityMixin {
 		at = @At(
 			value = "FIELD",
 			target = "Lnet/minecraft/world/entity/Entity;vehicle:Lnet/minecraft/world/entity/Entity;",
-			opcode = Opcodes.GETFIELD,
-			shift = At.Shift.AFTER
+			opcode = Opcodes.PUTFIELD
 		),
 		cancellable = true
 	)
-	private void carminite$canMountEntityRemoveVehicle(CallbackInfo ci) {
-		if (!EventHooks.canMountEntity((Entity) (Object) this, this.vehicle, false)) {
+	private void carminite$canMountEntityRemoveVehicle(
+		CallbackInfo ci,
+		@Local(name = "oldVehicle") Entity oldVehicle
+	) {
+		if (!EventHooks.canMountEntity((Entity) (Object) this, oldVehicle, false)) {
 			ci.cancel();
 		}
 	}
