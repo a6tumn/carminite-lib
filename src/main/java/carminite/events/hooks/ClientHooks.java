@@ -1,9 +1,6 @@
 package carminite.events.hooks;
 
-import carminite.events.neoforge.ComputeFovModifierEvent;
-import carminite.events.neoforge.InputEvent;
-import carminite.events.neoforge.MovementInputUpdateEvent;
-import carminite.events.neoforge.RenderFrameEvent;
+import carminite.events.neoforge.*;
 import carminite.interfaces.markers.IContinuousUseItem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.input.KeyEvent;
@@ -42,6 +39,12 @@ public class ClientHooks {
 		ComputeFovModifierEvent fovModifierEvent = new ComputeFovModifierEvent(entity, fovModifier, fovScale);
 		fovModifierEvent.post();
 		return fovModifierEvent.getNewFovModifier();
+	}
+
+	public static CalculatePlayerTurnEvent getTurnPlayerValues(double mouseSensitivity, boolean cinematicCameraEnabled) {
+		var event = new CalculatePlayerTurnEvent(mouseSensitivity, cinematicCameraEnabled);
+		event.post();
+		return event;
 	}
 
 	public static void fireRenderFramePre(DeltaTracker partialTick) {

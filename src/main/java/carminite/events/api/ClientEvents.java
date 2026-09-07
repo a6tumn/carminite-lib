@@ -41,6 +41,12 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<CalculatePlayerTurn> CALCULATE_PLAYER_TURN = EventFactory.createArrayBacked(CalculatePlayerTurn.class, callbacks -> event -> {
+        for (CalculatePlayerTurn callback : callbacks) {
+            callback.getTurnPlayerValues(event);
+        }
+    });
+
     @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
@@ -69,5 +75,10 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface ComputeFovModifier {
         void getFieldOfViewModifier(ComputeFovModifierEvent event);
+    }
+
+    @FunctionalInterface
+    public interface CalculatePlayerTurn {
+        void getTurnPlayerValues(CalculatePlayerTurnEvent event);
     }
 }
