@@ -1,5 +1,6 @@
 package carminite.events.api;
 
+import carminite.events.neoforge.InputEvent;
 import carminite.events.neoforge.MovementInputUpdateEvent;
 import carminite.events.neoforge.RenderFrameEvent;
 import carminite.events.neoforge.ViewportEvent;
@@ -31,6 +32,12 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<InputKey> INPUT_KEY = EventFactory.createArrayBacked(InputKey.class, callbacks -> event -> {
+        for (InputKey callback : callbacks) {
+            callback.onKeyInput(event);
+        }
+    });
+
     @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
@@ -49,5 +56,10 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface MovementInputUpdate {
         void onMovementInputUpdate(MovementInputUpdateEvent event);
+    }
+
+    @FunctionalInterface
+    public interface InputKey {
+        void onKeyInput(InputEvent.Key event);
     }
 }

@@ -1,9 +1,11 @@
 package carminite.events.hooks;
 
+import carminite.events.neoforge.InputEvent;
 import carminite.events.neoforge.MovementInputUpdateEvent;
 import carminite.events.neoforge.RenderFrameEvent;
 import carminite.interfaces.markers.IContinuousUseItem;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,6 +31,10 @@ public class ClientHooks {
 
 	public static void onMovementInputUpdate(Player player, ClientInput movementInput) {
 		new MovementInputUpdateEvent(player, movementInput).post();
+	}
+
+	public static void onKeyInput(KeyEvent keyEvent, int action) {
+		new InputEvent.Key(keyEvent, action).post();
 	}
 
 	public static void fireRenderFramePre(DeltaTracker partialTick) {

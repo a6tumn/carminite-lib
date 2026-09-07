@@ -57,6 +57,7 @@
     "ClientLevelMixin",
     "EntityHitboxDebugRendererMixin",
     "ItemInHandRendererMixin",
+    "KeyboardHandlerMixin",
     "LevelRendererMixin",
     "LocalPlayerMixin",
     "MinecraftMixin",
