@@ -5,12 +5,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -25,21 +23,10 @@ public class EnchantmentHelperMixin {
         )
     )
     private static Stream<Holder<Enchantment>> carminite$getAvailableEnchantmentResults(
-        Stream<Holder<Enchantment>> instance,
-        Predicate<? super Object> predicate,
-        @Local(argsOnly = true, name = "value") int value,
-        @Local(argsOnly = true, name = "itemStack") ItemStack itemStack,
-        @Local(name = "results") List<EnchantmentInstance> results
+        Stream<Holder<Enchantment>> source,
+        Predicate<? super Holder<Enchantment>> originalPredicate,
+        @Local(argsOnly = true, name = "itemStack") ItemStack itemStack
     ) {
-        instance.filter(enchantment -> itemStack.getItem().carminite$isPrimaryItemFor(itemStack, enchantment)).forEach(holder -> {
-            Enchantment enchantment = holder.value();
-            for (int level = enchantment.getMaxLevel(); level >= enchantment.getMinLevel(); level--) {
-                if (value >= enchantment.getMinCost(level) && value <= enchantment.getMaxCost(level)) {
-                    results.add(new EnchantmentInstance(holder, level));
-                    break;
-                }
-            }
-        });
-        return null;
+        return source.filter(enchantment -> itemStack.getItem().carminite$isPrimaryItemFor(itemStack, enchantment));
     }
 }
