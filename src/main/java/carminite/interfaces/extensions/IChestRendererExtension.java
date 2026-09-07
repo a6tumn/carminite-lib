@@ -9,7 +9,5 @@ import org.jspecify.annotations.Nullable;
 public interface IChestRendererExtension {
 
     @Nullable
-    default <T extends BlockEntity & LidBlockEntity> SpriteId carminite$getCustomSprite(T blockEntity, ChestRenderState renderState) {
-        return null;
-    }
+    <E extends BlockEntity & LidBlockEntity> SpriteId carminite$getCustomSprite(E blockEntity, ChestRenderState renderState);
 }

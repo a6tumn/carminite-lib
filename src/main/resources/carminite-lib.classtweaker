@@ -19,4 +19,3 @@ transitive-inject-interface net/minecraft/world/level/block/Block carminite/inte
 transitive-inject-interface net/minecraft/world/item/Item carminite/interfaces/extensions/IItemExtension
 transitive-inject-interface net/minecraft/world/level/block/BucketPickup carminite/interfaces/extensions/IBucketPickupExtension
 transitive-inject-interface net/minecraft/world/entity/Entity carminite/interfaces/extensions/IEntityExtension
-transitive-inject-interface net/minecraft/client/renderer/blockentity/ChestRenderer carminite/interfaces/extensions/IChestRendererExtension

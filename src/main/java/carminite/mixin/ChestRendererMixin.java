@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChestRenderer.class)
-public abstract class ChestRendererMixin<T extends BlockEntity & LidBlockEntity> implements IChestRendererExtension {
+public class ChestRendererMixin<T extends BlockEntity & LidBlockEntity> implements IChestRendererExtension {
 
     @Inject(
         method = "extractRenderState(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState;FLnet/minecraft/world/phys/Vec3;Lnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V",
@@ -47,5 +47,10 @@ public abstract class ChestRendererMixin<T extends BlockEntity & LidBlockEntity>
         @Local(argsOnly = true, name = "state") ChestRenderState state
     ) {
         return state.getData(CarminiteClient.CUSTOM_CHEST_SPRITE_KEY) != null ? state.getData(CarminiteClient.CUSTOM_CHEST_SPRITE_KEY) : original;
+    }
+
+    @Override
+    public @Nullable <E extends BlockEntity & LidBlockEntity> SpriteId carminite$getCustomSprite(E blockEntity, ChestRenderState renderState) {
+        return null;
     }
 }
