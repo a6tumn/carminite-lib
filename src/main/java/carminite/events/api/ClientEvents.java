@@ -1,5 +1,6 @@
 package carminite.events.api;
 
+import carminite.events.neoforge.MovementInputUpdateEvent;
 import carminite.events.neoforge.RenderFrameEvent;
 import carminite.events.neoforge.ViewportEvent;
 import net.fabricmc.fabric.api.event.Event;
@@ -24,6 +25,12 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<MovementInputUpdate> MOVEMENT_INPUT_UPDATE = EventFactory.createArrayBacked(MovementInputUpdate.class, callbacks -> event -> {
+        for (MovementInputUpdate callback : callbacks) {
+            callback.onMovementInputUpdate(event);
+        }
+    });
+
     @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
@@ -37,5 +44,10 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface ComputeCameraAngles {
         void computeCameraAngles(ViewportEvent.ComputeCameraAngles event);
+    }
+
+    @FunctionalInterface
+    public interface MovementInputUpdate {
+        void onMovementInputUpdate(MovementInputUpdateEvent event);
     }
 }

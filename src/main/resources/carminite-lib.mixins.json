@@ -58,6 +58,7 @@
     "EntityHitboxDebugRendererMixin",
     "ItemInHandRendererMixin",
     "LevelRendererMixin",
+    "LocalPlayerMixin",
     "MinecraftMixin",
     "MultiPlayerGameModeMixin"
   ],
