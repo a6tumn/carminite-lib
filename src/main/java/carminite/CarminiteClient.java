@@ -4,8 +4,11 @@ import carminite.multipart.IMultiPartEntity;
 import carminite.multipart.PartEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.RenderStateDataKey;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 
 public class CarminiteClient implements ClientModInitializer {
+    public static final RenderStateDataKey<SpriteId> CUSTOM_CHEST_SPRITE_KEY = RenderStateDataKey.create(() -> "custom_chest_sprite");
 
     @Override
     public void onInitializeClient() {
