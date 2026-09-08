@@ -1,6 +1,7 @@
 package carminite.mixin;
 
 import carminite.events.hooks.CommonHooks;
+import carminite.events.neoforge.LivingFallEvent;
 import carminite.interfaces.markers.IContinuousUseItem;
 import carminite.interfaces.markers.ISpecialLandingEffectsBlock;
 import carminite.interfaces.markers.ISpecialScaffoldingBlock;
@@ -8,6 +9,8 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
@@ -22,7 +25,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -151,5 +157,57 @@ public abstract class LivingEntityMixin {
 	) {
 		CommonHooks.onArmorHurt(damageSource, slots, durabilityDamage, (LivingEntity) (Object) this);
 		ci.cancel();
+	}
+
+	@Inject(
+		method = "causeFallDamage(DFLnet/minecraft/world/damagesource/DamageSource;)Z",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/world/entity/Entity;causeFallDamage(DFLnet/minecraft/world/damagesource/DamageSource;)Z"
+		),
+		cancellable = true
+	)
+	private void carminite$livingFall(
+		double fallDistance,
+		float damageModifier,
+		DamageSource damageSource,
+		CallbackInfoReturnable<Boolean> cir,
+		@Local(name = "effectiveFallDistance") double effectiveFallDistance,
+		@Share(value = "event", namespace = "carminite") LocalRef<LivingFallEvent> event
+	) {
+		event.set(CommonHooks.onLivingFall((LivingEntity) (Object) this, effectiveFallDistance, damageModifier));
+		if (event.get().isCanceled()) {
+			cir.setReturnValue(false);
+		}
+	}
+
+	@ModifyArgs(
+		method = "causeFallDamage(DFLnet/minecraft/world/damagesource/DamageSource;)Z",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/world/entity/Entity;causeFallDamage(DFLnet/minecraft/world/damagesource/DamageSource;)Z"
+		)
+	)
+	private void carminite$modifyCauseFallDamage(
+		Args args,
+		@Share(value = "event", namespace = "carminite") LocalRef<LivingFallEvent> event
+	) {
+		args.set(0, event.get().getDistance());
+		args.set(1, event.get().getDamageMultiplier());
+	}
+
+	@ModifyArgs(
+		method = "causeFallDamage(DFLnet/minecraft/world/damagesource/DamageSource;)Z",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/world/entity/LivingEntity;calculateFallDamage(DF)I"
+		)
+	)
+	private void carminite$modifyCalculateFallDamage(
+		Args args,
+		@Share(value = "event", namespace = "carminite") LocalRef<LivingFallEvent> event
+	) {
+		args.set(0, event.get().getDistance());
+		args.set(1, event.get().getDamageMultiplier());
 	}
 }

@@ -137,6 +137,11 @@ public class CommonHooks {
 		new LivingEvent.LivingJumpEvent(entity).post();
 	}
 
+	public static LivingFallEvent onLivingFall(LivingEntity entity, double distance, float damageMultiplier) {
+		LivingFallEvent event = new LivingFallEvent(entity, distance, damageMultiplier);
+		return event.post();
+	}
+
 	public static boolean onPlayerAttackTarget(Player player, Entity target) {
 		if (new AttackEntityEvent(player, target).post().isCanceled())
 			return false;

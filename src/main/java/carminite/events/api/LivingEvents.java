@@ -3,6 +3,7 @@ package carminite.events.api;
 import carminite.events.neoforge.ArmorHurtEvent;
 import carminite.events.neoforge.LivingDeathEvent;
 import carminite.events.neoforge.LivingEvent;
+import carminite.events.neoforge.LivingFallEvent;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 
@@ -25,6 +26,12 @@ public final class LivingEvents {
         }
     });
 
+    public static final Event<LivingFall> LIVING_FALL = EventFactory.createArrayBacked(LivingFall.class, callbacks -> event -> {
+        for (LivingFall callback : callbacks) {
+            callback.onLivingFall(event);
+        }
+    });
+
     @FunctionalInterface
     public interface ArmorHurt {
         void onArmorHurt(ArmorHurtEvent event);
@@ -38,5 +45,10 @@ public final class LivingEvents {
     @FunctionalInterface
     public interface LivingDeath {
         void onLivingDeath(LivingDeathEvent event);
+    }
+
+    @FunctionalInterface
+    public interface LivingFall {
+        void onLivingFall(LivingFallEvent event);
     }
 }
