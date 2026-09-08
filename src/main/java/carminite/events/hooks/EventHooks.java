@@ -2,7 +2,10 @@ package carminite.events.hooks;
 
 import carminite.events.neoforge.*;
 import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ServerExplosion;
 import net.minecraft.world.phys.HitResult;
@@ -76,5 +79,12 @@ public class EventHooks {
 			return false;
 		} else
 			return true;
+	}
+
+	public static PlayerSpawnPhantomsEvent firePlayerSpawnPhantoms(ServerPlayer player, ServerLevel level, BlockPos pos) {
+		Difficulty difficulty = level.getCurrentDifficultyAt(pos).getDifficulty();
+		var event = new PlayerSpawnPhantomsEvent(player, 1 + level.getRandom().nextInt(difficulty.getId() + 1));
+		event.post();
+		return event;
 	}
 }

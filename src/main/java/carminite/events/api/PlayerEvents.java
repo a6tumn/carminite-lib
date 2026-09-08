@@ -47,6 +47,12 @@ public final class PlayerEvents {
         }
     });
 
+    public static final Event<SpawnPhantoms> SPAWN_PHANTOMS = EventFactory.createArrayBacked(SpawnPhantoms.class, callbacks -> event -> {
+        for (SpawnPhantoms callback : callbacks) {
+            callback.firePlayerSpawnPhantoms(event);
+        }
+    });
+
     @FunctionalInterface
     public interface HarvestCheck {
         void doPlayerHarvestCheck(PlayerEvent.HarvestCheck event);
@@ -81,5 +87,10 @@ public final class PlayerEvents {
     @FunctionalInterface
     public interface ArrowLoose {
         void onArrowLoose(ArrowLooseEvent event);
+    }
+
+    @FunctionalInterface
+    public interface SpawnPhantoms {
+        void firePlayerSpawnPhantoms(PlayerSpawnPhantomsEvent event);
     }
 }

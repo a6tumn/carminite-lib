@@ -29,6 +29,7 @@
     "MapItemMixin",
     "MinecartSpawner$1Mixin",
     "PersistentEntitySectionManagerMixin",
+    "PhantomSpawnerMixin",
     "PistonBaseBlockMixin",
     "PistonStructureResolverMixin",
     "PlayerAdvancementsMixin",
