@@ -7,9 +7,12 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.sounds.Music;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector4f;
+import org.jspecify.annotations.Nullable;
 
 public class ClientHooks {
 	private static int slotMainHand = 0;
@@ -54,6 +57,13 @@ public class ClientHooks {
 		dest.set(fogRed, fogGreen, fogBlue, 1F);
 		CarminiteComputeFogColorEvent event = new CarminiteComputeFogColorEvent(camera, partialTick, dest);
 		event.post();
+	}
+
+	@Nullable
+	public static Music selectMusic(Music situational, @Nullable SoundInstance playing) {
+		SelectMusicEvent e = new SelectMusicEvent(situational, playing);
+		e.post();
+		return e.getMusic();
 	}
 
 	public static void fireRenderFramePre(DeltaTracker partialTick) {

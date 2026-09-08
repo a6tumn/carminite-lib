@@ -65,7 +65,8 @@
     "LocalPlayerMixin",
     "MinecraftMixin",
     "MouseHandlerMixin",
-    "MultiPlayerGameModeMixin"
+    "MultiPlayerGameModeMixin",
+    "MusicManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

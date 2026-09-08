@@ -54,6 +54,12 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<SelectMusic> SELECT_MUSIC = EventFactory.createArrayBacked(SelectMusic.class, callbacks -> event -> {
+        for (SelectMusic callback : callbacks) {
+            callback.selectMusic(event);
+        }
+    });
+
     @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
@@ -92,5 +98,10 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface ComputeFogColor {
         void getFogColor(CarminiteComputeFogColorEvent event);
+    }
+
+    @FunctionalInterface
+    public interface SelectMusic {
+        void selectMusic(SelectMusicEvent event);
     }
 }
