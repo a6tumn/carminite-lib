@@ -1,5 +1,6 @@
 package carminite.events.api;
 
+import carminite.events.modified.CarminiteComputeFogColorEvent;
 import carminite.events.neoforge.*;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -47,6 +48,12 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<ComputeFogColor> CARMINITE_COMPUTE_FOG_COLOR = EventFactory.createArrayBacked(ComputeFogColor.class, callbacks -> event -> {
+        for (ComputeFogColor callback : callbacks) {
+            callback.getFogColor(event);
+        }
+    });
+
     @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
@@ -80,5 +87,10 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface CalculatePlayerTurn {
         void getTurnPlayerValues(CalculatePlayerTurnEvent event);
+    }
+
+    @FunctionalInterface
+    public interface ComputeFogColor {
+        void getFogColor(CarminiteComputeFogColorEvent event);
     }
 }

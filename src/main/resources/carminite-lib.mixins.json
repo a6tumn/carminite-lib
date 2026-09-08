@@ -57,6 +57,7 @@
     "CameraMixin",
     "ClientLevelMixin",
     "EntityHitboxDebugRendererMixin",
+    "FogRendererMixin",
     "ItemInHandRendererMixin",
     "KeyboardHandlerMixin",
     "LevelRendererMixin",

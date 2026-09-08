@@ -1,12 +1,15 @@
 package carminite.events.hooks;
 
+import carminite.events.modified.CarminiteComputeFogColorEvent;
 import carminite.events.neoforge.*;
 import carminite.interfaces.markers.IContinuousUseItem;
+import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Vector4f;
 
 public class ClientHooks {
 	private static int slotMainHand = 0;
@@ -45,6 +48,12 @@ public class ClientHooks {
 		var event = new CalculatePlayerTurnEvent(mouseSensitivity, cinematicCameraEnabled);
 		event.post();
 		return event;
+	}
+
+	public static void getFogColor(Camera camera, float partialTick, float fogRed, float fogGreen, float fogBlue, Vector4f dest) {
+		dest.set(fogRed, fogGreen, fogBlue, 1F);
+		CarminiteComputeFogColorEvent event = new CarminiteComputeFogColorEvent(camera, partialTick, dest);
+		event.post();
 	}
 
 	public static void fireRenderFramePre(DeltaTracker partialTick) {
