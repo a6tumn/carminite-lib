@@ -60,6 +60,12 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<CustomizeBossHealth> CUSTOMIZE_BOSS_HEALTH_OVERLAY = EventFactory.createArrayBacked(CustomizeBossHealth.class, callbacks -> event -> {
+        for (CustomizeBossHealth callback : callbacks) {
+            callback.onCustomizeBossEventProgress(event);
+        }
+    });
+
     @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
@@ -103,5 +109,10 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface SelectMusic {
         void selectMusic(SelectMusicEvent event);
+    }
+
+    @FunctionalInterface
+    public interface CustomizeBossHealth {
+        void onCustomizeBossEventProgress(CustomizeGuiOverlayEvent.BossEventProgress event);
     }
 }

@@ -55,6 +55,7 @@
   "client": [
     "AbstractClientPlayerMixin",
     "BlockEntityRenderDispatcherMixin",
+    "BossHealthOverlayMixin",
     "CameraMixin",
     "ClientLevelMixin",
     "EntityHitboxDebugRendererMixin",

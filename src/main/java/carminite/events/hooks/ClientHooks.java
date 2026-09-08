@@ -3,8 +3,12 @@ package carminite.events.hooks;
 import carminite.events.modified.CarminiteComputeFogColorEvent;
 import carminite.events.neoforge.*;
 import carminite.interfaces.markers.IContinuousUseItem;
+import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -64,6 +68,13 @@ public class ClientHooks {
 		SelectMusicEvent e = new SelectMusicEvent(situational, playing);
 		e.post();
 		return e.getMusic();
+	}
+
+	public static CustomizeGuiOverlayEvent.BossEventProgress onCustomizeBossEventProgress(GuiGraphicsExtractor guiGraphics, Window window, LerpingBossEvent bossInfo, int x, int y, int increment) {
+		CustomizeGuiOverlayEvent.BossEventProgress evt = new CustomizeGuiOverlayEvent.BossEventProgress(window, guiGraphics,
+			Minecraft.getInstance().getDeltaTracker(), bossInfo, x, y, increment);
+		evt.post();
+		return evt;
 	}
 
 	public static void fireRenderFramePre(DeltaTracker partialTick) {
