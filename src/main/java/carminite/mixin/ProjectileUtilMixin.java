@@ -1,6 +1,5 @@
 package carminite.mixin;
 
-import carminite.interfaces.extensions.IEntityExtension;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +18,7 @@ public class ProjectileUtilMixin {
 		)
 	)
 	private static Entity carminite$skipRiderTarget(Entity entity) {
-		return ((IEntityExtension) entity).carminite$canRiderInteract()
+		return entity.carminite$canRiderInteract()
 			? null
 			: entity.getRootVehicle();
 	}
