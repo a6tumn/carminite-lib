@@ -27,7 +27,7 @@ public class PowderSnowBlockMixin {
         @Local(argsOnly = true, name = "entity") Entity entity
     ) {
         if (entity instanceof LivingEntity wearer) {
-            return instance.getItem().carminite$canWalkOnPowderedSnow(instance, wearer);
+            return instance.carminite$canWalkOnPowderedSnow(wearer);
         }
         return original.call(instance, o);
     }
