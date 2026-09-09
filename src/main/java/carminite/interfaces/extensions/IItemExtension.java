@@ -2,7 +2,6 @@ package carminite.interfaces.extensions;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,10 +16,6 @@ import java.util.Optional;
 public interface IItemExtension {
 	private Item self() {
 		return (Item) this;
-	}
-
-	default int carminite$getMaxStackSize(ItemStack stack) {
-		return stack.getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
 	}
 
 	default boolean carminite$onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
