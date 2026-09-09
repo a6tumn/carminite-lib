@@ -17,5 +17,6 @@ transitive-inject-interface net/minecraft/world/level/BaseSpawner carminite/inte
 transitive-inject-interface net/minecraft/world/level/block/state/BlockState carminite/interfaces/extensions/IBlockStateExtension
 transitive-inject-interface net/minecraft/world/level/block/Block carminite/interfaces/extensions/IBlockExtension
 transitive-inject-interface net/minecraft/world/item/Item carminite/interfaces/extensions/IItemExtension
+transitive-inject-interface net/minecraft/world/item/ItemStack carminite/interfaces/extensions/IItemStackExtension
 transitive-inject-interface net/minecraft/world/entity/Entity carminite/interfaces/extensions/IEntityExtension
 transitive-inject-interface net/minecraft/world/level/block/BucketPickup carminite/interfaces/extensions/IBucketPickupExtension
