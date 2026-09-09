@@ -23,6 +23,7 @@
     "GrindstoneMenu$4Mixin",
     "GrindstoneMenuMixin",
     "IllusionerMixin",
+    "ItemStackMixin",
     "LevelMixin",
     "LightningBoltMixin",
     "LivingEntityMixin",
