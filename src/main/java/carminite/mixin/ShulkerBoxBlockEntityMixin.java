@@ -19,6 +19,6 @@ public class ShulkerBoxBlockEntityMixin {
         Direction direction,
         Operation<Boolean> original
     ) {
-        return !(Block.byItem(itemStack.getItem()) instanceof ShulkerBoxBlock) && itemStack.getItem().carminite$canFitInsideContainerItems(itemStack);
+        return !(Block.byItem(itemStack.getItem()) instanceof ShulkerBoxBlock) && itemStack.carminite$canFitInsideContainerItems();
     }
 }

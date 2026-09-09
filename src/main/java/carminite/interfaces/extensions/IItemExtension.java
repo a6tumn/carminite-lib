@@ -15,6 +15,10 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.Optional;
 
 public interface IItemExtension {
+	private Item self() {
+		return (Item) this;
+	}
+
 	default int carminite$getMaxStackSize(ItemStack stack) {
 		return stack.getOrDefault(DataComponents.MAX_STACK_SIZE, 1);
 	}
@@ -33,7 +37,7 @@ public interface IItemExtension {
 	}
 
 	default boolean carminite$canFitInsideContainerItems(ItemStack stack) {
-		return ((Item) (Object) this).canFitInsideContainerItems();
+		return self().canFitInsideContainerItems();
 	}
 
 	@ApiStatus.OverrideOnly

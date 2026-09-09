@@ -14,6 +14,6 @@ public class ShulkerBoxSlotMixin {
         ItemStack itemStack,
         Operation<Boolean> original
     ) {
-        return itemStack.getItem().carminite$canFitInsideContainerItems(itemStack);
+        return itemStack.carminite$canFitInsideContainerItems();
     }
 }

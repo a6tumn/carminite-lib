@@ -14,6 +14,6 @@ public class BundleContentsMixin {
         ItemStack itemToAdd,
         Operation<Boolean> original
     ) {
-        return !itemToAdd.isEmpty() && itemToAdd.getItem().carminite$canFitInsideContainerItems(itemToAdd);
+        return !itemToAdd.isEmpty() && itemToAdd.carminite$canFitInsideContainerItems();
     }
 }

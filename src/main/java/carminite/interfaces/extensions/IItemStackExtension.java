@@ -17,4 +17,8 @@ public interface IItemStackExtension {
     default boolean carminite$canWalkOnPowderedSnow(LivingEntity wearer) {
         return self().getItem().carminite$canWalkOnPowderedSnow(self(), wearer);
     }
+
+    default boolean carminite$canFitInsideContainerItems() {
+        return self().getItem().carminite$canFitInsideContainerItems(self());
+    }
 }
