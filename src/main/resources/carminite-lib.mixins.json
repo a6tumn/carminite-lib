@@ -70,7 +70,8 @@
     "MinecraftMixin",
     "MouseHandlerMixin",
     "MultiPlayerGameModeMixin",
-    "MusicManagerMixin"
+    "MusicManagerMixin",
+    "ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
