@@ -61,6 +61,7 @@
     "BossHealthOverlayMixin",
     "CameraMixin",
     "ClientLevelMixin",
+    "CreativeModeInventoryScreenMixin",
     "EntityHitboxDebugRendererMixin",
     "FogRendererMixin",
     "ItemInHandRendererMixin",
@@ -71,7 +72,8 @@
     "MouseHandlerMixin",
     "MultiPlayerGameModeMixin",
     "MusicManagerMixin",
-    "ScreenMixin"
+    "ScreenMixin",
+    "SessionSearchTreesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

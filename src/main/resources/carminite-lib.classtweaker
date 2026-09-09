@@ -21,4 +21,3 @@ transitive-inject-interface net/minecraft/world/item/ItemStack carminite/interfa
 transitive-inject-interface net/minecraft/world/entity/Entity carminite/interfaces/extensions/IEntityExtension
 transitive-inject-interface net/minecraft/world/level/block/BucketPickup carminite/interfaces/extensions/IBucketPickupExtension
 transitive-inject-interface net/minecraft/world/item/TooltipFlag carminite/interfaces/extensions/ITooltipFlagExtension
-transitive-inject-interface net/minecraft/world/item/TooltipFlag$Default carminite/interfaces/extensions/ITooltipFlagExtension
