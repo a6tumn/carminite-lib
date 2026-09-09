@@ -27,6 +27,6 @@ public class EnchantmentHelperMixin {
         Predicate<? super Holder<Enchantment>> originalPredicate,
         @Local(argsOnly = true, name = "itemStack") ItemStack itemStack
     ) {
-        return source.filter(enchantment -> itemStack.getItem().carminite$isPrimaryItemFor(itemStack, enchantment));
+        return source.filter(itemStack::carminite$isPrimaryItemFor);
     }
 }

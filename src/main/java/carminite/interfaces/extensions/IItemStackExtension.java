@@ -21,4 +21,8 @@ public interface IItemStackExtension {
     default boolean carminite$canFitInsideContainerItems() {
         return self().getItem().carminite$canFitInsideContainerItems(self());
     }
+
+    default boolean carminite$isPrimaryItemFor(Holder<Enchantment> enchantment) {
+        return self().getItem().carminite$isPrimaryItemFor(self(), enchantment);
+    }
 }
