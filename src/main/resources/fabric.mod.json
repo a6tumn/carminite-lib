@@ -19,9 +19,6 @@
 		],
 		"client": [
 			"carminite.CarminiteClient"
-		],
-		"fabric-datagen": [
-			"carminite.CarminiteData"
 		]
 	},
 	"accessWidener": "carminite-lib.classtweaker",

@@ -3,12 +3,6 @@ plugins {
 	`maven-publish`
 }
 
-fabricApi {
-	configureDataGeneration {
-		client = true
-	}
-}
-
 loom {
 	accessWidenerPath = file("src/main/resources/carminite-lib.classtweaker")
 }
