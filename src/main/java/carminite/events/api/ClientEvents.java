@@ -1,6 +1,7 @@
 package carminite.events.api;
 
 import carminite.events.modified.CarminiteComputeFogColorEvent;
+import carminite.events.modified.CarminiteRenderLevelStageEvent;
 import carminite.events.neoforge.*;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -48,12 +49,6 @@ public final class ClientEvents {
         }
     });
 
-    public static final Event<ComputeFogColor> CARMINITE_COMPUTE_FOG_COLOR = EventFactory.createArrayBacked(ComputeFogColor.class, callbacks -> event -> {
-        for (ComputeFogColor callback : callbacks) {
-            callback.getFogColor(event);
-        }
-    });
-
     public static final Event<SelectMusic> SELECT_MUSIC = EventFactory.createArrayBacked(SelectMusic.class, callbacks -> event -> {
         for (SelectMusic callback : callbacks) {
             callback.selectMusic(event);
@@ -63,6 +58,18 @@ public final class ClientEvents {
     public static final Event<CustomizeBossHealth> CUSTOMIZE_BOSS_HEALTH_OVERLAY = EventFactory.createArrayBacked(CustomizeBossHealth.class, callbacks -> event -> {
         for (CustomizeBossHealth callback : callbacks) {
             callback.onCustomizeBossEventProgress(event);
+        }
+    });
+
+    public static final Event<ComputeFogColor> CARMINITE_COMPUTE_FOG_COLOR = EventFactory.createArrayBacked(ComputeFogColor.class, callbacks -> event -> {
+        for (ComputeFogColor callback : callbacks) {
+            callback.getFogColor(event);
+        }
+    });
+
+    public static final Event<AfterWeather> CARMINITE_RENDER_LEVEL_AFTER_WEATHER = EventFactory.createArrayBacked(AfterWeather.class, callbacks -> event -> {
+        for (AfterWeather callback : callbacks) {
+            callback.afterWeather(event);
         }
     });
 
@@ -102,11 +109,6 @@ public final class ClientEvents {
     }
 
     @FunctionalInterface
-    public interface ComputeFogColor {
-        void getFogColor(CarminiteComputeFogColorEvent event);
-    }
-
-    @FunctionalInterface
     public interface SelectMusic {
         void selectMusic(SelectMusicEvent event);
     }
@@ -114,5 +116,15 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface CustomizeBossHealth {
         void onCustomizeBossEventProgress(CustomizeGuiOverlayEvent.BossEventProgress event);
+    }
+
+    @FunctionalInterface
+    public interface ComputeFogColor {
+        void getFogColor(CarminiteComputeFogColorEvent event);
+    }
+
+    @FunctionalInterface
+    public interface AfterWeather {
+        void afterWeather(CarminiteRenderLevelStageEvent.AfterWeather event);
     }
 }
