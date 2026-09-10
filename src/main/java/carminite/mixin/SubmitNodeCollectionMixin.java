@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(SubmitNodeCollection.class)
-public abstract class SubmitNodeCollectionMixin implements OrderedSubmitNodeCollector, ISubmitNodeCollectionExtension {
+public abstract class SubmitNodeCollectionMixin implements ISubmitNodeCollectionExtension, OrderedSubmitNodeCollector {
 
     @Shadow
     private boolean wasUsed;

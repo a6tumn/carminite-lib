@@ -58,6 +58,7 @@
   "client": [
     "AbstractClientPlayerMixin",
     "BlockEntityRenderDispatcherMixin",
+    "BlockFeatureRendererMixin",
     "BlockModelRenderStateMixin",
     "BossHealthOverlayMixin",
     "CameraMixin",

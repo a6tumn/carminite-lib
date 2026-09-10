@@ -1,4 +1,4 @@
-package carminite.model;
+package carminite.client;
 
 import com.mojang.math.Transformation;
 import net.minecraft.client.renderer.block.dispatch.ModelState;
