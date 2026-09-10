@@ -58,6 +58,7 @@
   "client": [
     "AbstractClientPlayerMixin",
     "BlockEntityRenderDispatcherMixin",
+    "BlockModelRenderStateMixin",
     "BossHealthOverlayMixin",
     "CameraMixin",
     "ClientLevelMixin",
@@ -73,7 +74,8 @@
     "MultiPlayerGameModeMixin",
     "MusicManagerMixin",
     "ScreenMixin",
-    "SessionSearchTreesMixin"
+    "SessionSearchTreesMixin",
+    "SubmitNodeCollectionMixin"
   ],
   "injectors": {
     "defaultRequire": 1
