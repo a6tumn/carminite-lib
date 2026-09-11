@@ -1,5 +1,6 @@
 package carminite;
 
+import carminite.conditions.CarminiteConditions;
 import carminite.conditions.ICondition;
 import carminite.multipart.IMultiPartEntity;
 import carminite.multipart.PartEntity;
@@ -31,6 +32,7 @@ public class Carminite implements ModInitializer {
 	public void onInitialize() {
 		ServerLifecycleHooks.init();
 		registerServerMultipartEvents();
+		CarminiteConditions.init();
 	}
 
 	private static void registerServerMultipartEvents() {

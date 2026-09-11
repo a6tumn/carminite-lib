@@ -90,7 +90,6 @@ public interface ICondition {
             return List.of();
         }
 
-        @Deprecated(forRemoval = true, since = "26.1.2")
         default RegistryAccess registryAccess() {
             return RegistryAccess.EMPTY;
         }
