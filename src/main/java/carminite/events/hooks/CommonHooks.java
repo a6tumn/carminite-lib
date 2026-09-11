@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -147,5 +148,11 @@ public class CommonHooks {
 			return false;
 		ItemStack stack = player.getMainHandItem();
 		return stack.isEmpty() || !stack.getItem().carminite$onLeftClickEntity(stack, player, target);
+	}
+
+	public static ItemAttributeModifiers computeModifiedAttributes(ItemStack stack, ItemAttributeModifiers defaultModifiers) {
+		ItemAttributeModifierEvent event = new ItemAttributeModifierEvent(stack, defaultModifiers);
+		event.post();
+		return event.build();
 	}
 }

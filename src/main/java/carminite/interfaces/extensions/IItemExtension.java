@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -47,5 +48,9 @@ public interface IItemExtension {
 		}
 		Optional<HolderSet<Item>> primaryItems = enchantment.value().definition().primaryItems();
 		return this.carminite$supportsEnchantment(stack, enchantment) && (primaryItems.isEmpty() || stack.is(primaryItems.get()));
+	}
+
+	default ItemAttributeModifiers carminite$getDefaultAttributeModifiers(ItemStack stack) {
+		return ItemAttributeModifiers.EMPTY;
 	}
 }
