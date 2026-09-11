@@ -12,6 +12,10 @@ accessible field net/minecraft/world/inventory/GrindstoneMenu repairSlots Lnet/m
 # ExtendedBlockFeatureRenderer
 accessible method net/minecraft/client/renderer/feature/BlockFeatureRenderer putQuad (Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/resources/model/geometry/BakedQuad;Lcom/mojang/blaze3d/vertex/QuadInstance;[ILcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/VertexConsumer;)V
 
+# ConditionalOps
+accessible method net/minecraft/resources/RegistryOps <init> (Lcom/mojang/serialization/DynamicOps;Lnet/minecraft/resources/RegistryOps$RegistryInfoLookup;)V
+accessible field net/minecraft/resources/RegistryOps lookupProvider Lnet/minecraft/resources/RegistryOps$RegistryInfoLookup;
+
 # Interface Injections
 transitive-inject-interface net/minecraft/core/HolderLookup$Provider carminite/interfaces/extensions/IHolderLookupProviderExtension
 transitive-inject-interface net/minecraft/world/level/Level carminite/interfaces/extensions/ILevelExtension
@@ -28,3 +32,4 @@ transitive-inject-interface net/minecraft/client/renderer/OrderedSubmitNodeColle
 transitive-inject-interface net/minecraft/client/renderer/SubmitNodeStorage carminite/interfaces/extensions/ISubmitNodeStorageExtension
 transitive-inject-interface net/minecraft/client/renderer/SubmitNodeCollection carminite/interfaces/extensions/ISubmitNodeCollectionExtension
 transitive-inject-interface net/minecraft/client/renderer/block/BlockModelRenderState carminite/interfaces/extensions/IBlockModelRenderStateExtension
+transitive-inject-interface net/minecraft/client/data/models/EquipmentAssetProvider carminite/interfaces/extensions/IEquipmentAssetProviderExtension
