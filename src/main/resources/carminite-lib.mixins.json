@@ -51,9 +51,13 @@
     "ShulkerBoxBlockEntityMixin",
     "ShulkerBoxSlotMixin",
     "ShulkerBulletMixin",
+    "ShulkerMixin",
     "SlimeMixin",
     "SpawnerBlockEntity$1Mixin",
+    "SpreadPlayersCommandMixin",
+    "TeleportCommandMixin",
     "ThrowableProjectileMixin",
+    "ThrownEnderpearlMixin",
     "TrialSpawnerMixin",
     "WalkNodeEvaluatorMixin"
   ],

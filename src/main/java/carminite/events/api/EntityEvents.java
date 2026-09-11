@@ -1,5 +1,6 @@
 package carminite.events.api;
 
+import carminite.events.modified.CarminiteEntityTeleportEvent;
 import carminite.events.neoforge.EntityJoinLevelEvent;
 import carminite.events.neoforge.EntityMountEvent;
 import carminite.events.neoforge.EntityStruckByLightningEvent;
@@ -32,6 +33,12 @@ public final class EntityEvents {
         }
     });
 
+    public static final Event<EntityTeleport> CARMINITE_ENTITY_TELEPORT = EventFactory.createArrayBacked(EntityTeleport.class, callbacks -> event -> {
+        for (EntityTeleport callback : callbacks) {
+            callback.onEntityTeleport(event);
+        }
+    });
+
     @FunctionalInterface
     public interface EntityMount {
         void canMountEntity(EntityMountEvent event);
@@ -50,5 +57,10 @@ public final class EntityEvents {
     @FunctionalInterface
     public interface JoinLevel {
         void onEntityJoinLevel(EntityJoinLevelEvent event);
+    }
+
+    @FunctionalInterface
+    public interface EntityTeleport {
+        void onEntityTeleport(CarminiteEntityTeleportEvent event);
     }
 }

@@ -1,6 +1,8 @@
 package carminite.mixin;
 
+import carminite.events.hooks.CarminiteHooks;
 import carminite.events.hooks.CommonHooks;
+import carminite.events.modified.CarminiteEntityTeleportEvent;
 import carminite.events.neoforge.LivingFallEvent;
 import carminite.interfaces.markers.IContinuousUseItem;
 import carminite.interfaces.markers.ISpecialLandingEffectsBlock;
@@ -209,5 +211,26 @@ public abstract class LivingEntityMixin {
 	) {
 		args.set(0, event.get().getDistance());
 		args.set(1, event.get().getDamageMultiplier());
+	}
+
+	@Inject(
+		method = "randomTeleport(DDDZ)Z",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/world/entity/LivingEntity;teleportTo(DDD)V"
+		),
+		cancellable = true
+	)
+	private void carminite$entityTeleport(
+		double xx,
+		double yy,
+		double zz,
+		boolean showParticles,
+		CallbackInfoReturnable<Boolean> cir
+	) {
+		CarminiteEntityTeleportEvent event = CarminiteHooks.onEntityTeleport((LivingEntity) (Object) this);
+		if (event.isCanceled()) {
+			cir.setReturnValue(false);
+		}
 	}
 }

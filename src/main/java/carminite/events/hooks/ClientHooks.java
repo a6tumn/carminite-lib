@@ -1,10 +1,8 @@
 package carminite.events.hooks;
 
-import carminite.events.modified.CarminiteComputeFogColorEvent;
 import carminite.events.neoforge.*;
 import carminite.interfaces.markers.IContinuousUseItem;
 import com.mojang.blaze3d.platform.Window;
-import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -15,7 +13,6 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.sounds.Music;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.joml.Vector4f;
 import org.jspecify.annotations.Nullable;
 
 public class ClientHooks {
@@ -55,12 +52,6 @@ public class ClientHooks {
 		var event = new CalculatePlayerTurnEvent(mouseSensitivity, cinematicCameraEnabled);
 		event.post();
 		return event;
-	}
-
-	public static void getFogColor(Camera camera, float partialTick, float fogRed, float fogGreen, float fogBlue, Vector4f dest) {
-		dest.set(fogRed, fogGreen, fogBlue, 1F);
-		CarminiteComputeFogColorEvent event = new CarminiteComputeFogColorEvent(camera, partialTick, dest);
-		event.post();
 	}
 
 	@Nullable
