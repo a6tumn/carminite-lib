@@ -1,6 +1,6 @@
 package carminite.mixin;
 
-import carminite.events.hooks.ClientHooks;
+import carminite.events.hooks.CarminiteHooks;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -34,7 +34,7 @@ public class FogRendererMixin {
         @Local(name = "fogGreen") float fogGreen,
         @Local(name = "fogBlue") float fogBlue
     ) {
-        ClientHooks.getFogColor(camera, partialTicks, fogRed, fogGreen, fogBlue, dest);
+        CarminiteHooks.getFogColor(camera, partialTicks, fogRed, fogGreen, fogBlue, dest);
         ci.cancel();
     }
 }
