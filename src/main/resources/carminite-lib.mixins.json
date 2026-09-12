@@ -79,6 +79,7 @@
     "LevelRendererMixin",
     "LocalPlayerMixin",
     "MinecraftMixin",
+    "ModelTemplatesMixin",
     "MouseHandlerMixin",
     "MultiPlayerGameModeMixin",
     "MusicManagerMixin",
