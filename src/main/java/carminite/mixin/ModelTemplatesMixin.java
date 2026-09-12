@@ -1,5 +1,6 @@
 package carminite.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.resources.Identifier;
@@ -17,8 +18,11 @@ public class ModelTemplatesMixin {
             target = "Lnet/minecraft/resources/Identifier;withDefaultNamespace(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;"
         )
     )
-    private static Identifier carminite$createOne(String path) {
-        return ModelLocationUtils.decorateBlockModelLocation(path);
+    private static Identifier carminite$createOne(
+        String path,
+        @Local(argsOnly = true, name = "id") String id
+    ) {
+        return ModelLocationUtils.decorateBlockModelLocation(id);
     }
 
     @Redirect(
@@ -28,8 +32,11 @@ public class ModelTemplatesMixin {
             target = "Lnet/minecraft/resources/Identifier;withDefaultNamespace(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;"
         )
     )
-    private static Identifier carminite$createTwo(String path) {
-        return ModelLocationUtils.decorateBlockModelLocation(path);
+    private static Identifier carminite$createTwo(
+        String path,
+        @Local(argsOnly = true, name = "id") String id
+    ) {
+        return ModelLocationUtils.decorateBlockModelLocation(id);
     }
 
     @Redirect(
@@ -39,8 +46,11 @@ public class ModelTemplatesMixin {
             target = "Lnet/minecraft/resources/Identifier;withDefaultNamespace(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;"
         )
     )
-    private static Identifier carminite$createItemOne(String path) {
-        return ModelLocationUtils.decorateItemModelLocation(path);
+    private static Identifier carminite$createItemOne(
+        String path,
+        @Local(argsOnly = true, name = "id") String id
+    ) {
+        return ModelLocationUtils.decorateItemModelLocation(id);
     }
 
     @Redirect(
@@ -50,7 +60,10 @@ public class ModelTemplatesMixin {
             target = "Lnet/minecraft/resources/Identifier;withDefaultNamespace(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;"
         )
     )
-    private static Identifier carminite$createItemTwo(String path) {
-        return ModelLocationUtils.decorateItemModelLocation(path);
+    private static Identifier carminite$createItemTwo(
+        String path,
+        @Local(argsOnly = true, name = "id") String id
+    ) {
+        return ModelLocationUtils.decorateItemModelLocation(id);
     }
 }

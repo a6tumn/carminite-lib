@@ -1,5 +1,6 @@
 package carminite.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,8 +17,11 @@ public class ModelLocationUtilsMixin {
             target = "Lnet/minecraft/resources/Identifier;withDefaultNamespace(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;"
         )
     )
-    private static Identifier carminite$decorateBlockModelLocation(String path) {
-        return Identifier.parse(path).withPrefix("block/");
+    private static Identifier carminite$decorateBlockModelLocation(
+        String path,
+        @Local(argsOnly = true, name = "id") String id
+    ) {
+        return Identifier.parse(id).withPrefix("block/");
     }
 
     @Redirect(
@@ -27,7 +31,10 @@ public class ModelLocationUtilsMixin {
             target = "Lnet/minecraft/resources/Identifier;withDefaultNamespace(Ljava/lang/String;)Lnet/minecraft/resources/Identifier;"
         )
     )
-    private static Identifier carminite$decorateItemModelLocation(String path) {
-        return Identifier.parse(path).withPrefix("item/");
+    private static Identifier carminite$decorateItemModelLocation(
+        String path,
+        @Local(argsOnly = true, name = "id") String id
+    ) {
+        return Identifier.parse(id).withPrefix("item/");
     }
 }
