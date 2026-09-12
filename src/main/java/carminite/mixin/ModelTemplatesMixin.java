@@ -18,7 +18,7 @@ public class ModelTemplatesMixin {
         )
     )
     private static Identifier carminite$createOne(String path) {
-        return ModelLocationUtils.decorateItemModelLocation(path);
+        return ModelLocationUtils.decorateBlockModelLocation(path);
     }
 
     @Redirect(
@@ -29,7 +29,7 @@ public class ModelTemplatesMixin {
         )
     )
     private static Identifier carminite$createTwo(String path) {
-        return ModelLocationUtils.decorateItemModelLocation(path);
+        return ModelLocationUtils.decorateBlockModelLocation(path);
     }
 
     @Redirect(
