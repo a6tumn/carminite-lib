@@ -24,6 +24,7 @@
     "GrindstoneMenu$4Mixin",
     "GrindstoneMenuMixin",
     "IllusionerMixin",
+    "ItemContainerContentsMixin",
     "ItemStackMixin",
     "LevelMixin",
     "LightningBoltMixin",
