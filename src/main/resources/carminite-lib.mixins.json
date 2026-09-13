@@ -13,7 +13,6 @@
     "BowItemMixin",
     "BundleContentsMixin",
     "CamelMixin",
-    "DelegatingOpsAccessor",
     "EnchantCommandMixin",
     "EnchantmentHelperMixin",
     "EnchantRandomlyFunctionMixin",
