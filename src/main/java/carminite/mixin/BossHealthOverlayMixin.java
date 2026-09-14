@@ -1,69 +1,100 @@
 package carminite.mixin;
 
 import carminite.events.hooks.ClientHooks;
+import carminite.events.neoforge.CustomizeGuiOverlayEvent;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.BossHealthOverlay;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.profiling.Profiler;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.BossEvent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(BossHealthOverlay.class)
-public abstract class BossHealthOverlayMixin {
-
-    @Shadow
-    @Final
-    private Map<UUID, LerpingBossEvent> events;
-
-    @Shadow
-    protected abstract void extractBar(GuiGraphicsExtractor graphics, int x, int y, BossEvent event);
+public class BossHealthOverlayMixin {
 
     @Shadow
     @Final
     private Minecraft minecraft;
 
-    /**
-     * @author Autumn
-     * @reason NeoForge significantly changes the control flow here in a way that is difficult to reproduce with Mixin.
-     */
-    @Overwrite
-    public void extractRenderState(final GuiGraphicsExtractor graphics) {
-        if (!this.events.isEmpty()) {
-            graphics.nextStratum();
-            ProfilerFiller profiler = Profiler.get();
-            profiler.push("bossHealth");
-            int screenWidth = graphics.guiWidth();
-            int yOffset = 12;
+    @WrapOperation(
+        method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/gui/components/BossHealthOverlay;extractBar(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IILnet/minecraft/world/BossEvent;)V"
+        )
+    )
+    private void carminite$customizeBossEvent(
+        BossHealthOverlay instance,
+        GuiGraphicsExtractor graphics,
+        int x,
+        int y,
+        BossEvent event,
+        Operation<Void> original,
+        @Local(name = "event") LerpingBossEvent lerpingBossEvent,
+        @Share(value = "bossEvent", namespace = "carminite") LocalRef<CustomizeGuiOverlayEvent.BossEventProgress> bossEvent
+    ) {
+        CustomizeGuiOverlayEvent.BossEventProgress customizeEvent = ClientHooks.onCustomizeBossEventProgress(graphics, this.minecraft.getWindow(), lerpingBossEvent, x, y, 10 + this.minecraft.font.lineHeight);
+        bossEvent.set(customizeEvent);
 
-            for(LerpingBossEvent event : this.events.values()) {
-                int xLeft = screenWidth / 2 - 91;
-                var customizeEvent = ClientHooks.onCustomizeBossEventProgress(graphics, this.minecraft.getWindow(), event, xLeft, yOffset, 10 + this.minecraft.font.lineHeight);
-                if (!customizeEvent.isCanceled()) {
-                    this.extractBar(graphics, xLeft, yOffset, event);
-                    Component msg = event.getName();
-                    int width = this.minecraft.font.width(msg);
-                    int x = screenWidth / 2 - width / 2;
-                    int y = yOffset - 9;
-                    graphics.text(this.minecraft.font, msg, x, y, -1);
-                    Objects.requireNonNull(this.minecraft.font);
-                    yOffset += customizeEvent.getIncrement();
-                }
-                if (yOffset >= graphics.guiHeight() / 3) {
-                    break;
-                }
-            }
-
-            profiler.pop();
+        if (!customizeEvent.isCanceled()) {
+            original.call(instance, graphics, x, y, event);
         }
+    }
+
+    @WrapWithCondition(
+        method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;text(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V"
+        )
+    )
+    private boolean carminite$customizeBossName(
+        GuiGraphicsExtractor instance,
+        Font font,
+        Component str,
+        int x,
+        int y,
+        int color,
+        @Share(value = "bossEvent", namespace = "carminite") LocalRef<CustomizeGuiOverlayEvent.BossEventProgress> bossEvent
+    ) {
+        CustomizeGuiOverlayEvent.BossEventProgress event = bossEvent.get();
+        return event == null || !event.isCanceled();
+    }
+
+    @ModifyVariable(
+        method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;)V",
+        at = @At(
+            value = "STORE",
+            ordinal = 1
+        ),
+        name = "yOffset"
+    )
+    private int carminite$customIncrement(
+        int yOffset,
+        @Share(value = "bossEvent", namespace = "carminite") LocalRef<CustomizeGuiOverlayEvent.BossEventProgress> bossEvent
+    ) {
+        var event = bossEvent.get();
+        if (event == null) {
+            return yOffset;
+        }
+
+        int oldYOffset = yOffset - 19;
+        if (event.isCanceled()) {
+            return oldYOffset;
+        }
+
+        return oldYOffset + event.getIncrement();
     }
 }
