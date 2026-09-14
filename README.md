@@ -15,6 +15,5 @@ This library contains some useful NeoForge compatibility shims and is published 
 
 ## Slated for Removal by 26.3
 
-- Everything in the network package
 - IHolderLookupProviderExtension
 - ILevelReaderExtension
