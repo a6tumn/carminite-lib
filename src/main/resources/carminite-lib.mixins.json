@@ -44,6 +44,7 @@
     "ProjectileUtilMixin",
     "ProjectileWeaponItemMixin",
     "RedStoneWireBlockMixin",
+    "RemoveBlockGoalMixin",
     "ResultSlotMixin",
     "ServerExplosionMixin",
     "ServerLevelMixin",
@@ -60,7 +61,9 @@
     "ThrowableProjectileMixin",
     "ThrownEnderpearlMixin",
     "TrialSpawnerMixin",
-    "WalkNodeEvaluatorMixin"
+    "WalkNodeEvaluatorMixin",
+    "WitherBossMixin",
+    "WitherSkullMixin"
   ],
   "client": [
     "AbstractClientPlayerMixin",

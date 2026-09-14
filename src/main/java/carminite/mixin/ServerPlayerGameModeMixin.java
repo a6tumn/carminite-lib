@@ -76,17 +76,4 @@ public class ServerPlayerGameModeMixin {
 			cir.setReturnValue(event.getCancellationResult());
 		}
 	}
-
-	@Inject(
-		method = "destroyBlock(Lnet/minecraft/core/BlockPos;)Z",
-		at = @At("HEAD"),
-		cancellable = true
-	)
-	private void carminite$canEntityDestroy(
-		BlockPos pos,
-		CallbackInfoReturnable<Boolean> cir
-	) {
-		BlockState state = this.level.getBlockState(pos);
-		cir.setReturnValue(state.carminite$canEntityDestroy(this.level, pos, player));
-	}
 }
