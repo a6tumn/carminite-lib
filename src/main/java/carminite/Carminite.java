@@ -1,11 +1,13 @@
 package carminite;
 
+import carminite.crafting.CompoundIngredient;
 import carminite.multipart.IMultiPartEntity;
 import carminite.multipart.PartEntity;
 import carminite.util.ServerLifecycleHooks;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredientSerializer;
 import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
@@ -23,6 +25,11 @@ public class Carminite implements ModInitializer {
 	public void onInitialize() {
 		ServerLifecycleHooks.init();
 		registerServerMultipartEvents();
+		registerCustomIngredientSerializers();
+	}
+
+	private static void registerCustomIngredientSerializers() {
+		CustomIngredientSerializer.register(CompoundIngredient.SERIALIZER);
 	}
 
 	private static void registerServerMultipartEvents() {
