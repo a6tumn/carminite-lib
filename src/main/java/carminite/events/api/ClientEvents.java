@@ -49,12 +49,6 @@ public final class ClientEvents {
         }
     });
 
-    public static final Event<SelectMusic> SELECT_MUSIC = EventFactory.createArrayBacked(SelectMusic.class, callbacks -> event -> {
-        for (SelectMusic callback : callbacks) {
-            callback.selectMusic(event);
-        }
-    });
-
     public static final Event<CustomizeBossHealth> CUSTOMIZE_BOSS_HEALTH_OVERLAY = EventFactory.createArrayBacked(CustomizeBossHealth.class, callbacks -> event -> {
         for (CustomizeBossHealth callback : callbacks) {
             callback.onCustomizeBossEventProgress(event);
@@ -106,11 +100,6 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface CalculatePlayerTurn {
         void getTurnPlayerValues(CalculatePlayerTurnEvent event);
-    }
-
-    @FunctionalInterface
-    public interface SelectMusic {
-        void selectMusic(SelectMusicEvent event);
     }
 
     @FunctionalInterface

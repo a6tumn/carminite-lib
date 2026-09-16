@@ -89,7 +89,6 @@
     "ModelTemplatesMixin",
     "MouseHandlerMixin",
     "MultiPlayerGameModeMixin",
-    "MusicManagerMixin",
     "ScreenMixin",
     "SessionSearchTreesMixin",
     "SubmitNodeCollectionMixin"

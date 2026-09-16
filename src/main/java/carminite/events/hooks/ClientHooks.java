@@ -9,11 +9,8 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.player.ClientInput;
-import net.minecraft.client.resources.sounds.SoundInstance;
-import net.minecraft.sounds.Music;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.jspecify.annotations.Nullable;
 
 public class ClientHooks {
 	private static int slotMainHand = 0;
@@ -52,13 +49,6 @@ public class ClientHooks {
 		var event = new CalculatePlayerTurnEvent(mouseSensitivity, cinematicCameraEnabled);
 		event.post();
 		return event;
-	}
-
-	@Nullable
-	public static Music selectMusic(Music situational, @Nullable SoundInstance playing) {
-		SelectMusicEvent e = new SelectMusicEvent(situational, playing);
-		e.post();
-		return e.getMusic();
 	}
 
 	public static CustomizeGuiOverlayEvent.BossEventProgress onCustomizeBossEventProgress(GuiGraphicsExtractor guiGraphics, Window window, LerpingBossEvent bossInfo, int x, int y, int increment) {
