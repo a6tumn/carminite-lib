@@ -31,6 +31,13 @@ public abstract class WeightedListMixin<E> {
 
         @Override
         @SuppressWarnings("unchecked")
+        public WeightedList.Builder<E> carminite$add(Weighted<E> value) {
+            this.result.add(value);
+            return (WeightedList.Builder<E>) (Object) this;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
         public WeightedList.Builder<E> carminite$addAll(Collection<Weighted<E>> values) {
             this.result.addAll(values);
             return (WeightedList.Builder<E>) (Object) this;
