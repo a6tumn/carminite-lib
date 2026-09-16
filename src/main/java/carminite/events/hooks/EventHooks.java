@@ -4,10 +4,14 @@ import carminite.events.neoforge.*;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.Container;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerExplosion;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.ApiStatus;
 import net.minecraft.core.BlockPos;
@@ -86,5 +90,15 @@ public class EventHooks {
 		var event = new PlayerSpawnPhantomsEvent(player, 1 + level.getRandom().nextInt(difficulty.getId() + 1));
 		event.post();
 		return event;
+	}
+
+	private static final WeightedList<MobSpawnSettings.SpawnerData> NO_SPAWNS = WeightedList.of();
+	public static WeightedList<MobSpawnSettings.SpawnerData> getPotentialSpawns(LevelAccessor level, MobCategory category, BlockPos pos, WeightedList<MobSpawnSettings.SpawnerData> oldList) {
+		LevelEvent.PotentialSpawns event = new LevelEvent.PotentialSpawns(level, category, pos, oldList);
+		if (event.post().isCanceled())
+			return NO_SPAWNS;
+		else if (event.getSpawnerDataList() == oldList.unwrap())
+			return oldList;
+		return WeightedList.of(event.getSpawnerDataList());
 	}
 }

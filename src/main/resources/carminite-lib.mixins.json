@@ -34,6 +34,7 @@
     "MapItemMixin",
     "MinecartSpawner$1Mixin",
     "MobMixin",
+    "NaturalSpawnerMixin",
     "PersistentEntitySectionManagerMixin",
     "PhantomSpawnerMixin",
     "PistonBaseBlockMixin",
@@ -62,6 +63,8 @@
     "ThrownEnderpearlMixin",
     "TrialSpawnerMixin",
     "WalkNodeEvaluatorMixin",
+    "WeightedListMixin",
+    "WeightedListMixin$BuilderMixin",
     "WitherBossMixin",
     "WitherSkullMixin"
   ],
