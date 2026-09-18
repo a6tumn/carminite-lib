@@ -70,6 +70,7 @@
   ],
   "client": [
     "AbstractClientPlayerMixin",
+    "AvatarRendererMixin",
     "BlockEntityRenderDispatcherMixin",
     "BlockFeatureRendererMixin",
     "BlockModelRenderStateMixin",

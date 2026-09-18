@@ -3,12 +3,16 @@ package carminite.events.hooks;
 import carminite.events.neoforge.*;
 import carminite.interfaces.markers.IContinuousUseItem;
 import com.mojang.blaze3d.platform.Window;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.LerpingBossEvent;
 import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -64,5 +68,9 @@ public class ClientHooks {
 
 	public static void fireRenderFramePost(DeltaTracker partialTick) {
 		new RenderFrameEvent.Post(partialTick).post();
+	}
+
+	public static boolean renderSpecificFirstPersonArm(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, AbstractClientPlayer player, HumanoidArm arm) {
+		return new RenderArmEvent(poseStack, submitNodeCollector, packedLight, player, arm).post().isCanceled();
 	}
 }

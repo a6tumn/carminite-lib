@@ -67,6 +67,12 @@ public final class ClientEvents {
         }
     });
 
+    public static final Event<RenderArm> RENDER_ARM = EventFactory.createArrayBacked(RenderArm.class, callbacks -> event -> {
+        for (RenderArm callback : callbacks) {
+            callback.renderSpecificFirstPersonArm(event);
+        }
+    });
+
     @FunctionalInterface
     public interface RenderFramePre {
         void fireRenderFramePre(RenderFrameEvent.Pre event);
@@ -115,5 +121,10 @@ public final class ClientEvents {
     @FunctionalInterface
     public interface AfterWeather {
         void afterWeather(CarminiteRenderLevelStageEvent.AfterWeather event);
+    }
+
+    @FunctionalInterface
+    public interface RenderArm {
+        void renderSpecificFirstPersonArm(RenderArmEvent event);
     }
 }
