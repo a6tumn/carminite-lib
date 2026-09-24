@@ -8,8 +8,13 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.MapItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.maps.MapId;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ItemInHandRenderer.class)
 public class ItemInHandRendererMixin {
@@ -61,5 +66,20 @@ public class ItemInHandRendererMixin {
 			expectedItem,
 			-1
 		);
+	}
+
+	@Redirect(
+		method = "renderMap(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/world/item/ItemStack;)V",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/world/item/MapItem;getSavedData(Lnet/minecraft/world/level/saveddata/maps/MapId;Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/level/saveddata/maps/MapItemSavedData;"
+		)
+	)
+	private MapItemSavedData carminite$renderMap(
+		MapId id,
+		Level level,
+		@Local(argsOnly = true, name = "itemStack") ItemStack itemStack
+	) {
+		return MapItem.getSavedData(itemStack, level);
 	}
 }
