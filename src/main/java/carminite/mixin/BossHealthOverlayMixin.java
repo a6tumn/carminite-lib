@@ -91,9 +91,6 @@ public class BossHealthOverlayMixin {
         }
 
         int oldYOffset = yOffset - 19;
-        if (event.isCanceled()) {
-            return oldYOffset;
-        }
 
         return oldYOffset + event.getIncrement();
     }
