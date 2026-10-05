@@ -79,7 +79,6 @@
     "BossHealthOverlayMixin",
     "CameraMixin",
     "ClientLevelMixin",
-    "CreativeModeInventoryScreenMixin",
     "EntityHitboxDebugRendererMixin",
     "EquipmentAssetProviderMixin",
     "FogRendererMixin",
@@ -94,8 +93,6 @@
     "ModelTemplatesMixin",
     "MouseHandlerMixin",
     "MultiPlayerGameModeMixin",
-    "ScreenMixin",
-    "SessionSearchTreesMixin",
     "SubmitNodeCollectionMixin"
   ],
   "injectors": {
