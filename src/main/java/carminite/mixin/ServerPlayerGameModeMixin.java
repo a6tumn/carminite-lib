@@ -1,6 +1,7 @@
 package carminite.mixin;
 
 import carminite.events.hooks.CommonHooks;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -33,24 +34,20 @@ public class ServerPlayerGameModeMixin {
 	@Final
 	protected ServerPlayer player;
 
-	@Inject(
+	@ModifyExpressionValue(
 		method = "destroyBlock(Lnet/minecraft/core/BlockPos;)Z",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/server/level/ServerLevel;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;",
-			shift = At.Shift.AFTER
-		),
-		cancellable = true
+			target = "Lnet/minecraft/world/item/ItemStack;canDestroyBlock(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;)Z"
+		)
 	)
-	private void carminite$fireBreakBlockEvent(
-		BlockPos pos,
-		CallbackInfoReturnable<Boolean> cir
+	private boolean carminite$fireBreakBlockEvent(
+		boolean original,
+		@Local(argsOnly = true, name = "pos") BlockPos pos,
+		@Local(name = "state") BlockState state
 	) {
-		BlockState state = this.level.getBlockState(pos);
 		var event = CommonHooks.fireBlockBreak(this.level, this.gameModeForPlayer, this.player, pos, state);
-		if (event.isCanceled()) {
-			cir.setReturnValue(false);
-		}
+		return !event.isCanceled();
 	}
 
 	@Inject(
