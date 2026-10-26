@@ -6,6 +6,7 @@ import net.minecraft.client.input.KeyEvent;
 import org.jetbrains.annotations.ApiStatus;
 
 public abstract class InputEvent extends CarminiteEvent {
+
     @ApiStatus.Internal
     protected InputEvent() {}
 

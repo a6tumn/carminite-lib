@@ -47,6 +47,7 @@ public abstract class ViewportEvent extends CarminiteEvent {
         public float getYaw() {
             return yaw;
         }
+
         public void setYaw(float yaw) {
             this.yaw = yaw;
         }
@@ -54,6 +55,7 @@ public abstract class ViewportEvent extends CarminiteEvent {
         public float getPitch() {
             return pitch;
         }
+
         public void setPitch(float pitch) {
             this.pitch = pitch;
         }
