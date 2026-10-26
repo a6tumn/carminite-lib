@@ -10,6 +10,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import org.joml.Vector3fc;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,19 +45,7 @@ public abstract class CameraMixin {
 
     @Shadow
     @Final
-    private static Vector3f FORWARDS;
-
-    @Shadow
-    @Final
     private Vector3f forwards;
-
-    @Shadow
-    @Final
-    private static Vector3f UP;
-
-    @Shadow
-    @Final
-    private static Vector3f LEFT;
 
     @Shadow
     @Final
@@ -68,6 +57,18 @@ public abstract class CameraMixin {
 
     @Shadow
     private int matrixPropertiesDirty;
+
+    @Shadow
+    @Final
+    private static Vector3fc FORWARDS;
+
+    @Shadow
+    @Final
+    private static Vector3fc UP;
+
+    @Shadow
+    @Final
+    private static Vector3fc LEFT;
 
     @WrapMethod(
         method = "setRotation(FF)V"

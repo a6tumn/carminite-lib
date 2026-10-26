@@ -18,6 +18,4 @@ public class CarminiteHooks {
         CarminiteComputeFogColorEvent event = new CarminiteComputeFogColorEvent(camera, partialTick, dest);
         event.post();
     }
-
-
 }

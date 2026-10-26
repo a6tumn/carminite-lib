@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.state.MapRenderState;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 
-@FunctionalInterface
 public interface IMapDecorationRenderer {
     boolean render(
         MapRenderState.MapDecorationRenderState decorationRenderState,

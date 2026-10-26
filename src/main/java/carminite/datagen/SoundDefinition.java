@@ -44,9 +44,6 @@ public final class SoundDefinition {
         }
 
         public Sound volume(final float volume) {
-            // Wiki specifies that volume cannot be higher than 1.0F, but I don't see any checks in vanilla nor in the
-            // original specs (https://www.reddit.com/r/Minecraft/comments/1ont25/snapshot_13w42a_has_been_released/cctryvp/)
-            // Set at own risk
             if (volume <= 0.0F) {
                 throw new IllegalArgumentException("Volume must be positive for sound " + this.name + ", but instead got " + volume);
             }
@@ -138,7 +135,7 @@ public final class SoundDefinition {
     }
 
     public enum SoundType {
-        SOUND("sound"),
+        SOUND("file"),
         EVENT("event");
 
         private final String jsonString;

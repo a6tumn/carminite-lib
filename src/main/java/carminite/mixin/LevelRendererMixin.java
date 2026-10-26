@@ -1,14 +1,8 @@
 package carminite.mixin;
 
 import carminite.events.modified.CarminiteRenderLevelStageEvent;
-import carminite.util.LevelRendererFrustumHolder;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
-import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.state.level.LevelRenderState;
 import net.minecraft.util.profiling.Profiler;
 import org.spongepowered.asm.mixin.Final;
@@ -24,29 +18,6 @@ public class LevelRendererMixin {
     @Shadow
     @Final
     private LevelRenderState levelRenderState;
-
-    @WrapOperation(
-        method = "extractLevel(Lnet/minecraft/client/DeltaTracker;Lnet/minecraft/client/Camera;F)V",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/LevelRenderer;extractVisibleBlockEntities(Lnet/minecraft/client/Camera;FLnet/minecraft/client/renderer/state/level/LevelRenderState;)V"
-        )
-    )
-    private void carminite$extractFrustum(
-        LevelRenderer instance,
-        Camera camera,
-        float deltaPartialTick,
-        LevelRenderState levelRenderState,
-        Operation<Void> original,
-        @Local(name = "cullFrustum") Frustum cullFrustum
-    ) {
-        LevelRendererFrustumHolder.setFrustum(cullFrustum);
-        try {
-            original.call(instance, camera, deltaPartialTick, levelRenderState);
-        } finally {
-            LevelRendererFrustumHolder.clear();
-        }
-    }
 
     @Inject(
         method = "lambda$addWeatherPass$0",
