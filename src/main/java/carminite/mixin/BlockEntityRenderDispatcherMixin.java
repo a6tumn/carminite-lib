@@ -35,6 +35,7 @@ public abstract class BlockEntityRenderDispatcherMixin implements IBlockEntityRe
 	}
 
 	@Nullable
+	@Override
 	public <E extends BlockEntity, S extends BlockEntityRenderState> S carminite$tryExtractRenderState(E blockEntity, float partialTicks, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress, @Nullable Frustum frustum) {
 		BlockEntityRenderer<E, S> renderer = this.getRenderer(blockEntity);
 		if (renderer == null) {
