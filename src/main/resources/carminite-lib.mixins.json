@@ -2,6 +2,7 @@
   "required": true,
   "package": "carminite.mixin",
   "compatibilityLevel": "JAVA_25",
+  "plugin": "carminite.CarminiteMixinPlugin",
   "mixins": [
     "AbstractArrowMixin",
     "AbstractHorseMixin",
@@ -83,6 +84,7 @@
     "ItemInHandRendererMixin",
     "KeyboardHandlerMixin",
     "LevelRendererMixin",
+    "LevelRendererMixinExtension",
     "LocalPlayerMixin",
     "MapRendererMixin",
     "MinecraftMixin",
