@@ -7,10 +7,20 @@ loom {
 	accessWidenerPath = file("src/main/resources/carminite-lib.classtweaker")
 }
 
+repositories {
+	maven {
+		name = "Modrinth"
+		url = uri("https://api.modrinth.com/maven")
+	}
+}
+
 dependencies {
 	minecraft("com.mojang:minecraft:${providers.gradleProperty("minecraft_version").get()}")
 	implementation("net.fabricmc:fabric-loader:${providers.gradleProperty("loader_version").get()}")
 	implementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_api_version").get()}")
+
+	// Compat
+	implementation("maven.modrinth:AANobbMI:xJZxADzI") // Sodium
 }
 
 tasks.processResources {
