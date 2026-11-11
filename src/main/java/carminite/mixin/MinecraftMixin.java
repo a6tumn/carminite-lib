@@ -2,20 +2,28 @@ package carminite.mixin;
 
 import carminite.events.hooks.ClientHooks;
 import carminite.events.hooks.CommonHooks;
+import carminite.interfaces.extensions.IMinecraftExtension;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.main.GameConfig;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.block.BlockModelResolver;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Minecraft.class)
-public class MinecraftMixin {
+public class MinecraftMixin implements IMinecraftExtension {
+
+	@Unique
+	private BlockModelResolver carminite$blockModelResolver;
 
 	@Shadow
 	@Nullable
@@ -24,6 +32,21 @@ public class MinecraftMixin {
 	@Shadow
 	@Final
 	private DeltaTracker.Timer deltaTracker;
+
+	@Inject(
+		method = "<init>",
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/client/renderer/item/ItemModelResolver;<init>(Lnet/minecraft/client/resources/model/ModelManager;)V"
+		)
+	)
+	private void carminite$captureBlockModelResolver(
+		GameConfig gameConfig,
+		CallbackInfo ci,
+		@Local(name = "blockModelResolver") BlockModelResolver blockModelResolver
+	) {
+		this.carminite$blockModelResolver = blockModelResolver;
+	}
 
 	@Inject(
 		method = "startAttack()Z",
@@ -65,5 +88,10 @@ public class MinecraftMixin {
 		CallbackInfo ci
 	) {
 		ClientHooks.fireRenderFramePost(this.deltaTracker);
+	}
+
+	@Override
+	public BlockModelResolver carminite$getBlockModelResolver() {
+		return this.carminite$blockModelResolver;
 	}
 }
